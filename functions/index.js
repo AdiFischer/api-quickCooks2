@@ -5,7 +5,7 @@ import { addNewRecipe, getAllRecipes, updateRecipe, getOneRecipe, deleteRecipe, 
 
 
 const app = express()
-app.use(express.json())
+app.use(express.json({limit:"15mb"}))
 app.use(cors())
 
 app.post('/recipes', addNewRecipe)
