@@ -81,21 +81,21 @@ export const getMeat = async (req, res) => {
       .catch((err) => res.status(500).send(err));
     res.send(theseMeat);
   };
-export const getChicken = async (req, res) => {
-    const query = { type: "Chicken" };
-    let theseChicken= await chicken
+export const getPoultry = async (req, res) => {
+    const query = { type: "Poultry" };
+    let thesePoultry= await poultry
       .find(query)
       .toArray()
       .catch((err) => res.status(500).send(err));
-    res.send(theseChicken);
+    res.send(thesePoultry);
   };
-export const getFish = async (req, res) => {
-    const query = { type: "Fish" };
-    let theseFish= await fish
+export const getSeafood = async (req, res) => {
+    const query = { type: "Seafood" };
+    let theseSeafood= await seafood
       .find(query)
       .toArray()
       .catch((err) => res.status(500).send(err));
-    res.send(theseFish);
+    res.send(theseSeafood);
   };
 export const getDesserts = async (req, res) => {
     const query = { type: "Desserts" };
