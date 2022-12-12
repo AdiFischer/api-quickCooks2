@@ -1,11 +1,12 @@
 import { dbConnect } from "./dbConnect.js"
 import { ObjectId } from "mongodb"
-
+const db = dbConnect()
+const recipes = db.collection("recipes")
 
 export async function addNewRecipe(req, res) {
     const newRecipe = req.body
-    const db = dbConnect()
-    await db.collection("recipes").insertOne
+    
+    await recipes.insertOne
         (newRecipe)
         .catch(err => {
             res.status(500).send(err)
@@ -16,14 +17,14 @@ export async function addNewRecipe(req, res) {
 }
 
 export async function getAllRecipes(req, res) {
-    const db = dbConnect()
-    const collection = await db.collection("recipes").find().toArray()
+    
+    const collection = await recipes.find().toArray()
     res.send(collection)
 }
 
 export async function updateRecipe(req, res) {
     const { recipeId } = req.params
-    const db = dbConnect()
+    
     await db.collection('recipes')
         .findOneAndUpdate({ _id: new ObjectId(recipeId) }, { $set: req.body })
         .catch(err => {
@@ -34,25 +35,25 @@ export async function updateRecipe(req, res) {
 }
 
 export async function getOneRecipe(req, res) {
-    const db = dbConnect()
+    
     const { recipeId } = req.params
-    const collection = await db.collection("recipes")
+    const collection = await recipes
         .find({ _id: new ObjectId(recipeId) }).toArray()
     res.send(collection)
 }
 
 export async function deleteRecipe(req, res) {
-    const db = dbConnect()
+    
     const { recipeId } = req.params
-    const collection = await db.collection("recipes")
+    const collection = await recipes
         .findOneAndDelete({ _id: new ObjectId(recipeId) })
     res.status(203).send('Recipe Deleted')
 }
 
 export async function getRecipeByType(req,res) {
-    const db = dbConnect()
+    
     const { type } = req.params
-    const collection = await db.collection("recipes")
+    const collection = await recipes
     .find({ type: type }).toArray()
     res.send(collection)
 }
