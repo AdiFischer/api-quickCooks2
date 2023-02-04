@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
+import 'dotenv/config'
 import functions from "firebase-functions";
 import { addNewRecipe, getAllRecipes, updateRecipe, getOneRecipe, deleteRecipe, getSalads, getDairy, getMeat, getPoultry, getSeafood, getDesserts, getRecipeByType } from "./src/recipes.js";
 
 
 const app = express()
-app.use(express.json({limit:"15mb"}))
+app.use(express.json({ limit: "15mb" }))
 app.use(cors())
 
 app.post('/recipes', addNewRecipe)
