@@ -29,7 +29,7 @@ export async function updateRecipe(req, res) {
   console.log(req.headers.authentication)
   const decoded = await authConnect().verifyIdToken(req.headers.authentication)
   await db.collection('recipes')
-    .findOneAndUpdate({ _id: new ObjectId(recipeId), uid: decoded.findOneAndUpdate }, { $set: req.body })
+    .findOneAndUpdate({ _id: new ObjectId(recipeId), uid: decoded.uid }, { $set: req.body })
     .catch(err => {
       res.status(500).send(err)
       return
